@@ -6,5 +6,5 @@ Versión 1
 
 Cliente-Servidor y Consultas básicas
 - Generada por Àlex
-- Verificada por
+- Verificada por Pau
 - Comunicada por Victor
