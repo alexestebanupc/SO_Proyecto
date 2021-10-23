@@ -9,4 +9,4 @@ Cliente-Servidor y Consultas básicas
 - Verificada por Pau
 - Comunicada por Victor
 
-- [Video]: https://drive.google.com/drive/u/1/folders/1YdYRf7cPqLc3xWV0YidbuP5yXF5sYg_C
+- [Video](https://drive.google.com/drive/u/1/folders/1YdYRf7cPqLc3xWV0YidbuP5yXF5sYg_C "Link al vídeo v1")
