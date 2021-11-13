@@ -20,7 +20,7 @@ Cliente-Servidor y Consultas básicas
 
 Versión 3
 
-Cliente-Servidor y Consultas básicas
+Lista de conectados como notificación
 - Generada por Victor
 - Verificada por Àlex
 - Comunicada por Pau
