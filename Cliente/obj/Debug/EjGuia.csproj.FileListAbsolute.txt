@@ -1,0 +1,10 @@
+C:\Users\Àlex Esteban\Desktop\Uni\SO - Sistemes Operatius\Ejercicio guia\EjGuia\bin\Debug\EjGuia.exe.config
+C:\Users\Àlex Esteban\Desktop\Uni\SO - Sistemes Operatius\Ejercicio guia\EjGuia\bin\Debug\EjGuia.exe
+C:\Users\Àlex Esteban\Desktop\Uni\SO - Sistemes Operatius\Ejercicio guia\EjGuia\bin\Debug\EjGuia.pdb
+C:\Users\Àlex Esteban\Desktop\Uni\SO - Sistemes Operatius\Ejercicio guia\EjGuia\obj\Debug\EjGuia.csproj.AssemblyReference.cache
+C:\Users\Àlex Esteban\Desktop\Uni\SO - Sistemes Operatius\Ejercicio guia\EjGuia\obj\Debug\EjGuia.Form1.resources
+C:\Users\Àlex Esteban\Desktop\Uni\SO - Sistemes Operatius\Ejercicio guia\EjGuia\obj\Debug\EjGuia.Properties.Resources.resources
+C:\Users\Àlex Esteban\Desktop\Uni\SO - Sistemes Operatius\Ejercicio guia\EjGuia\obj\Debug\EjGuia.csproj.GenerateResource.cache
+C:\Users\Àlex Esteban\Desktop\Uni\SO - Sistemes Operatius\Ejercicio guia\EjGuia\obj\Debug\EjGuia.csproj.CoreCompileInputs.cache
+C:\Users\Àlex Esteban\Desktop\Uni\SO - Sistemes Operatius\Ejercicio guia\EjGuia\obj\Debug\EjGuia.exe
+C:\Users\Àlex Esteban\Desktop\Uni\SO - Sistemes Operatius\Ejercicio guia\EjGuia\obj\Debug\EjGuia.pdb

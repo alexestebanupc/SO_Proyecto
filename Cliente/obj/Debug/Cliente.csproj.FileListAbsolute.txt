@@ -1,0 +1,55 @@
+C:\Users\Àlex Esteban\Desktop\Uni\SO - Sistemes Operatius\Projecte\Repositorio\Cliente\bin\Debug\EjGuia.exe.config
+C:\Users\Àlex Esteban\Desktop\Uni\SO - Sistemes Operatius\Projecte\Repositorio\Cliente\bin\Debug\EjGuia.exe
+C:\Users\Àlex Esteban\Desktop\Uni\SO - Sistemes Operatius\Projecte\Repositorio\Cliente\bin\Debug\EjGuia.pdb
+C:\Users\Àlex Esteban\Desktop\Uni\SO - Sistemes Operatius\Projecte\Repositorio\Cliente\obj\Debug\Cliente.csproj.AssemblyReference.cache
+C:\Users\Àlex Esteban\Desktop\Uni\SO - Sistemes Operatius\Projecte\Repositorio\Cliente\obj\Debug\EjGuia.Inicio.resources
+C:\Users\Àlex Esteban\Desktop\Uni\SO - Sistemes Operatius\Projecte\Repositorio\Cliente\obj\Debug\EjGuia.LogIn.resources
+C:\Users\Àlex Esteban\Desktop\Uni\SO - Sistemes Operatius\Projecte\Repositorio\Cliente\obj\Debug\EjGuia.Properties.Resources.resources
+C:\Users\Àlex Esteban\Desktop\Uni\SO - Sistemes Operatius\Projecte\Repositorio\Cliente\obj\Debug\Cliente.csproj.GenerateResource.cache
+C:\Users\Àlex Esteban\Desktop\Uni\SO - Sistemes Operatius\Projecte\Repositorio\Cliente\obj\Debug\Cliente.csproj.CoreCompileInputs.cache
+C:\Users\Àlex Esteban\Desktop\Uni\SO - Sistemes Operatius\Projecte\Repositorio\Cliente\obj\Debug\EjGuia.exe
+C:\Users\Àlex Esteban\Desktop\Uni\SO - Sistemes Operatius\Projecte\Repositorio\Cliente\obj\Debug\EjGuia.pdb
+C:\Users\victo\OneDrive\Escritorio\Universidad\3 Año\1 Cuatrimestre\SO\Proyecto\V1\Cliente\bin\Debug\EjGuia.exe.config
+C:\Users\victo\OneDrive\Escritorio\Universidad\3 Año\1 Cuatrimestre\SO\Proyecto\V1\Cliente\bin\Debug\EjGuia.exe
+C:\Users\victo\OneDrive\Escritorio\Universidad\3 Año\1 Cuatrimestre\SO\Proyecto\V1\Cliente\bin\Debug\EjGuia.pdb
+C:\Users\victo\OneDrive\Escritorio\Universidad\3 Año\1 Cuatrimestre\SO\Proyecto\V1\Cliente\obj\Debug\Cliente.csprojAssemblyReference.cache
+C:\Users\victo\OneDrive\Escritorio\Universidad\3 Año\1 Cuatrimestre\SO\Proyecto\V1\Cliente\obj\Debug\EjGuia.Inicio.resources
+C:\Users\victo\OneDrive\Escritorio\Universidad\3 Año\1 Cuatrimestre\SO\Proyecto\V1\Cliente\obj\Debug\EjGuia.LogIn.resources
+C:\Users\victo\OneDrive\Escritorio\Universidad\3 Año\1 Cuatrimestre\SO\Proyecto\V1\Cliente\obj\Debug\EjGuia.Properties.Resources.resources
+C:\Users\victo\OneDrive\Escritorio\Universidad\3 Año\1 Cuatrimestre\SO\Proyecto\V1\Cliente\obj\Debug\Cliente.csproj.GenerateResource.cache
+C:\Users\victo\OneDrive\Escritorio\Universidad\3 Año\1 Cuatrimestre\SO\Proyecto\V1\Cliente\obj\Debug\Cliente.csproj.CoreCompileInputs.cache
+C:\Users\victo\OneDrive\Escritorio\Universidad\3 Año\1 Cuatrimestre\SO\Proyecto\V1\Cliente\obj\Debug\EjGuia.exe
+C:\Users\victo\OneDrive\Escritorio\Universidad\3 Año\1 Cuatrimestre\SO\Proyecto\V1\Cliente\obj\Debug\EjGuia.pdb
+C:\Users\victo\OneDrive\Escritorio\Universidad\3 Año\1 Cuatrimestre\SO\Proyecto\V2\Cliente\bin\Debug\EjGuia.exe.config
+C:\Users\victo\OneDrive\Escritorio\Universidad\3 Año\1 Cuatrimestre\SO\Proyecto\V2\Cliente\bin\Debug\EjGuia.exe
+C:\Users\victo\OneDrive\Escritorio\Universidad\3 Año\1 Cuatrimestre\SO\Proyecto\V2\Cliente\bin\Debug\EjGuia.pdb
+C:\Users\victo\OneDrive\Escritorio\Universidad\3 Año\1 Cuatrimestre\SO\Proyecto\V2\Cliente\obj\Debug\Cliente.csprojAssemblyReference.cache
+C:\Users\victo\OneDrive\Escritorio\Universidad\3 Año\1 Cuatrimestre\SO\Proyecto\V2\Cliente\obj\Debug\EjGuia.Inicio.resources
+C:\Users\victo\OneDrive\Escritorio\Universidad\3 Año\1 Cuatrimestre\SO\Proyecto\V2\Cliente\obj\Debug\EjGuia.LogIn.resources
+C:\Users\victo\OneDrive\Escritorio\Universidad\3 Año\1 Cuatrimestre\SO\Proyecto\V2\Cliente\obj\Debug\EjGuia.Properties.Resources.resources
+C:\Users\victo\OneDrive\Escritorio\Universidad\3 Año\1 Cuatrimestre\SO\Proyecto\V2\Cliente\obj\Debug\Cliente.csproj.GenerateResource.cache
+C:\Users\victo\OneDrive\Escritorio\Universidad\3 Año\1 Cuatrimestre\SO\Proyecto\V2\Cliente\obj\Debug\Cliente.csproj.CoreCompileInputs.cache
+C:\Users\victo\OneDrive\Escritorio\Universidad\3 Año\1 Cuatrimestre\SO\Proyecto\V2\Cliente\obj\Debug\EjGuia.exe
+C:\Users\victo\OneDrive\Escritorio\Universidad\3 Año\1 Cuatrimestre\SO\Proyecto\V2\Cliente\obj\Debug\EjGuia.pdb
+C:\Users\victo\OneDrive\Escritorio\Universidad\3 Año\1 Cuatrimestre\SO\Proyecto\V4\Cliente\bin\Debug\EjGuia.exe.config
+C:\Users\victo\OneDrive\Escritorio\Universidad\3 Año\1 Cuatrimestre\SO\Proyecto\V4\Cliente\bin\Debug\EjGuia.exe
+C:\Users\victo\OneDrive\Escritorio\Universidad\3 Año\1 Cuatrimestre\SO\Proyecto\V4\Cliente\bin\Debug\EjGuia.pdb
+C:\Users\victo\OneDrive\Escritorio\Universidad\3 Año\1 Cuatrimestre\SO\Proyecto\V4\Cliente\obj\Debug\Cliente.csprojAssemblyReference.cache
+C:\Users\victo\OneDrive\Escritorio\Universidad\3 Año\1 Cuatrimestre\SO\Proyecto\V4\Cliente\obj\Debug\EjGuia.Inicio.resources
+C:\Users\victo\OneDrive\Escritorio\Universidad\3 Año\1 Cuatrimestre\SO\Proyecto\V4\Cliente\obj\Debug\EjGuia.LogIn.resources
+C:\Users\victo\OneDrive\Escritorio\Universidad\3 Año\1 Cuatrimestre\SO\Proyecto\V4\Cliente\obj\Debug\EjGuia.Properties.Resources.resources
+C:\Users\victo\OneDrive\Escritorio\Universidad\3 Año\1 Cuatrimestre\SO\Proyecto\V4\Cliente\obj\Debug\Cliente.csproj.GenerateResource.cache
+C:\Users\victo\OneDrive\Escritorio\Universidad\3 Año\1 Cuatrimestre\SO\Proyecto\V4\Cliente\obj\Debug\Cliente.csproj.CoreCompileInputs.cache
+C:\Users\victo\OneDrive\Escritorio\Universidad\3 Año\1 Cuatrimestre\SO\Proyecto\V4\Cliente\obj\Debug\EjGuia.exe
+C:\Users\victo\OneDrive\Escritorio\Universidad\3 Año\1 Cuatrimestre\SO\Proyecto\V4\Cliente\obj\Debug\EjGuia.pdb
+C:\Users\victo\OneDrive\Escritorio\Universidad\3 Año\1 Cuatrimestre\SO\Proyecto\V3\Cliente\bin\Debug\EjGuia.exe.config
+C:\Users\victo\OneDrive\Escritorio\Universidad\3 Año\1 Cuatrimestre\SO\Proyecto\V3\Cliente\bin\Debug\EjGuia.exe
+C:\Users\victo\OneDrive\Escritorio\Universidad\3 Año\1 Cuatrimestre\SO\Proyecto\V3\Cliente\bin\Debug\EjGuia.pdb
+C:\Users\victo\OneDrive\Escritorio\Universidad\3 Año\1 Cuatrimestre\SO\Proyecto\V3\Cliente\obj\Debug\Cliente.csprojAssemblyReference.cache
+C:\Users\victo\OneDrive\Escritorio\Universidad\3 Año\1 Cuatrimestre\SO\Proyecto\V3\Cliente\obj\Debug\EjGuia.Inicio.resources
+C:\Users\victo\OneDrive\Escritorio\Universidad\3 Año\1 Cuatrimestre\SO\Proyecto\V3\Cliente\obj\Debug\EjGuia.LogIn.resources
+C:\Users\victo\OneDrive\Escritorio\Universidad\3 Año\1 Cuatrimestre\SO\Proyecto\V3\Cliente\obj\Debug\EjGuia.Properties.Resources.resources
+C:\Users\victo\OneDrive\Escritorio\Universidad\3 Año\1 Cuatrimestre\SO\Proyecto\V3\Cliente\obj\Debug\Cliente.csproj.GenerateResource.cache
+C:\Users\victo\OneDrive\Escritorio\Universidad\3 Año\1 Cuatrimestre\SO\Proyecto\V3\Cliente\obj\Debug\Cliente.csproj.CoreCompileInputs.cache
+C:\Users\victo\OneDrive\Escritorio\Universidad\3 Año\1 Cuatrimestre\SO\Proyecto\V3\Cliente\obj\Debug\EjGuia.exe
+C:\Users\victo\OneDrive\Escritorio\Universidad\3 Año\1 Cuatrimestre\SO\Proyecto\V3\Cliente\obj\Debug\EjGuia.pdb
