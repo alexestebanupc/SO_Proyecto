@@ -20,8 +20,110 @@ typedef struct {
 	Conectado conectados[MAX];
 } ListaConectados;
 
+typedef struct{
+	int estado;// 0 si esta vacia, 1 si esta la partida en el lobby. 2 si la partida ha empezado
+	int num_jugadores;
+	Conectado Jugador1;
+	Conectado Jugador2;
+	Conectado Jugador3;
+	Conectado Jugador4;
+	//int numeroPartida; //Hacer una variable global para saber por que numero de partida vamos.
+}Partida;
+
+typedef Partida TablaPartidas[100];
 
 ListaConectados listaConectados;
+TablaPartidas tablaPartidas;
+
+//Funciones de la tabla de partidas
+
+void Inicializar(TablaPartidas tabla){
+	//Inicializa la tabla
+	int i;
+	for(i=0;i<100;i++){
+		tabla[i].estado = 0;
+		tabla[i].num_jugadores = 0;
+		tabla[i].Jugador1.socket = -1;
+		tabla[i].Jugador2.socket = -1;
+		tabla[i].Jugador3.socket = -1;
+		tabla[i].Jugador4.socket = -1;
+	}
+}
+
+int PrimeraPosicionLibre(TablaPartidas tabla){
+	// Devuelve la posición del primer hueco libre
+	int encontrado = 0;
+	int i = 0;
+	while((i<100)&&(!encontrado)){
+		if(tabla[i].estado==0){
+			encontrado = 1;
+		}
+		else
+		   i=i+1;
+	}
+	if (!encontrado){
+		return -1;//No quedan huecos libres
+	}
+	else{
+		return i;//Primera posicion libre
+	}
+	
+}
+
+int PonerJugador(TablaPartidas tabla, char nombre[30], int socket, int res){
+	//Poner jugador y su socket
+	// 0 si se guarda correctamente
+	// -1 no quedan partidas libres
+	// -2 ya hay 4 jugadores
+	if(res!=-1){//Si quedan partidas libres
+		
+		if(tabla[res].num_jugadores == 0){
+			strcpy(tabla[res].Jugador1.nombre,nombre);
+			tabla[res].Jugador1.socket = socket;
+			tabla[res].num_jugadores = 1;
+			tabla[res].estado = 1;
+			return 0;
+		}
+		else if(tabla[res].num_jugadores == 1){
+			strcpy(tabla[res].Jugador2.nombre,nombre);
+			tabla[res].Jugador2.socket = socket;
+			tabla[res].num_jugadores = 2;
+			return 0;
+		}
+		else if(tabla[res].num_jugadores == 2){
+			strcpy(tabla[res].Jugador3.nombre,nombre);
+			tabla[res].Jugador3.socket = socket;
+			tabla[res].num_jugadores = 3;
+			return 0;
+		}
+		else if(tabla[res].num_jugadores == 3){
+			strcpy(tabla[res].Jugador4.nombre,nombre);
+			tabla[res].Jugador4.socket = socket;
+			tabla[res].num_jugadores = 4;
+			return 0;
+		}
+		else
+			return -2; // Ya hay 4 jugadores
+	}
+	else
+	   return -1; //No quedan partidas libres
+}
+
+int BorrarPartida(TablaPartidas tabla, int indice){
+	
+	//
+	tabla[indice].estado = 0;
+	tabla[indice].num_jugadores = 0;
+	tabla[indice].Jugador1.socket = -1;
+	tabla[indice].Jugador2.socket = -1;
+	tabla[indice].Jugador3.socket = -1;
+	tabla[indice].Jugador4.socket = -1;
+	strcpy(tabla[indice].Jugador1.nombre,"");
+	strcpy(tabla[indice].Jugador2.nombre,"");
+	strcpy(tabla[indice].Jugador3.nombre,"");
+	strcpy(tabla[indice].Jugador4.nombre,"");
+}
+
 
 //Funciones de la lista de conectados
 
@@ -125,9 +227,9 @@ void Entrega(ListaConectados *lista, char cadena[200], char nombres[200]) {
 MYSQL *conn;
 pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER; 
 int i;
-int sockets[MAX];
+int sockets[MAX]; //no limitRLO a 100 y el de threads tampoco
 
-void Codigo1_1(char nombre[20], char password[20], char buff2[512], char usuario[20]) { 
+void Codigo1_1(char nombre[20], char password[20], char buff2[512], char usuario[20], int sock_conn) { 
 	// Iniciar sesión.
 	// 0 Usuario loggeado
 	// 1 Contraseña incorrecta.
@@ -153,7 +255,7 @@ void Codigo1_1(char nombre[20], char password[20], char buff2[512], char usuario
 			
 			sprintf(buff2, "1/1/%s", "0"); //Usuario loggeado
 			pthread_mutex_lock( &mutex );
-			AnadirConectado(&listaConectados, nombre, socket); //Añadir conectado
+			AnadirConectado(&listaConectados, nombre, sock_conn); //Añadir conectado
 			pthread_mutex_unlock( &mutex );
 			strcpy(usuario,nombre);
 		}
@@ -330,6 +432,104 @@ void Codigo2_3(char nombre[20], char password[20],  char buff2[512]) {
 	printf ("%s\n", buff2);
 }
 
+void Codigo2_5(char emisor[20], char receptor[20], char buff2[512], int sock_conn) {
+	//Invitar usuario
+	//0 Enviamos el mensaje al receptor
+	//-1 Enviamos un aviso del problema al emisor(No hay lugares libres en la tabla).
+	//-2 Enviamos un aviso del problema al emisor(Estan los 4 jugadores llenos).
+
+	int res = PrimeraPosicionLibre(tablaPartidas);
+	int socket_receptor = GetSocket(&listaConectados, receptor);
+	int aux = PonerJugador(tablaPartidas, emisor, sock_conn, res);
+	
+	if(aux == 0){
+		sprintf(buff2, "2/5/0,%s,%d", emisor, res);
+		//Y lo enviamos
+		write(socket_receptor,buff2, strlen(buff2));
+		printf ("%s\n", buff2);
+		sprintf(buff2, "2/5/3,%d", res);
+		write(sock_conn, buff2,strlen(buff2));//Enviamos el indice al emisor
+	}
+	else if(aux == -1){
+		sprintf(buff2, "2/5/1");
+		//Y lo enviamos
+		write(sock_conn,buff2, strlen(buff2));
+	}
+	else if(aux == -2){
+		sprintf(buff2, "2/5/2");
+		write(sock_conn,buff2, strlen(buff2));
+	}
+	// exit(0);
+	printf ("%s\n", buff2);
+}
+
+void Codigo2_6(char resultado[20] , int indice, char buff2[512], char usuario[20], int sock_conn){
+	// Respuesta invitacion
+	//0 Enviamos el mensaje al receptor
+	//-1 Enviamos un aviso del problema al emisor(No hay lugares libres en la tabla).
+	//-2 Enviamos un aviso del problema al emisor(Estan los 4 jugadores llenos).
+	//3 El tiempo ha expirado y no puede entrar en la partida
+	
+	char receptor[20];
+	strcpy(receptor,tablaPartidas[indice].Jugador1.nombre);
+	int socket_receptor = GetSocket(&listaConectados, receptor);
+	
+	if(strcmp(resultado,"si")==0){
+		
+		if(tablaPartidas[indice].estado == 1){// Si la partida aun no ha empezado ponemos el jugador
+			int aux = PonerJugador(tablaPartidas, usuario, sock_conn, indice);
+			if(aux == 0){
+				sprintf(buff2, "2/6/0,%s,%d,%s", resultado, indice, usuario);
+				write (socket_receptor, buff2, strlen(buff2));
+			}
+			else if(aux == -1){
+				sprintf(buff2, "2/6/1"); 
+				//Y lo enviamos
+				write(sock_conn,buff2, strlen(buff2));
+			}
+			else if(aux == -2){
+				sprintf(buff2, "2/6/2");
+				write(sock_conn,buff2, strlen(buff2));
+			}
+		}
+		else{
+			sprintf(buff2, "2/6/3"); //
+			//Y lo enviamos
+			write(sock_conn, buff2, strlen(buff2));
+		}
+	}
+	else{
+		sprintf(buff2, "2/6/0,%s,%d,%s", resultado, indice, usuario);
+		write (socket_receptor, buff2, strlen(buff2));
+	}
+	printf ("%s\n", buff2);
+}
+
+void Codigo2_7(int indice, char buff2[512], int sock_conn){
+	// Han pasado 10 ssegundos desde la primera invitacion
+	//0 Enviamos el mensaje a todos los jugadores que hayan aceptado la invitación antes de los 10 segundos
+	//1 Enviamos el mensaje al emisor de que nadie ha aceptado su partida
+	
+	if(tablaPartidas[indice].Jugador2.socket != -1){//Almenos hay 2 jugadores en la partida, así que podrá empezar
+		tablaPartidas[indice].estado = 2;
+		strcpy(buff2,"2/7/0");
+		write (tablaPartidas[indice].Jugador1.socket, buff2, strlen(buff2));
+		write (tablaPartidas[indice].Jugador2.socket, buff2, strlen(buff2));
+		if (tablaPartidas[indice].Jugador3.socket){
+			write (tablaPartidas[indice].Jugador3.socket, buff2, strlen(buff2));
+		}
+		if(tablaPartidas[indice].Jugador4.socket){
+			write (tablaPartidas[indice].Jugador4.socket, buff2, strlen(buff2));
+		}
+		
+	}
+	else { //La partida no empieza porque nadie ha aceptado
+		strcpy(buff2,"2/7/1");
+		write (tablaPartidas[indice].Jugador1.socket, buff2, strlen(buff2));
+		BorrarPartida(tablaPartidas,indice);
+	}
+}
+
 void *AtenderCliente(void *socket){
 	
 	int sock_conn;
@@ -380,10 +580,10 @@ void *AtenderCliente(void *socket){
 			p = strtok( NULL, "/");
 			strcpy (password, p);
 			if (codigo == 1) { // Iniciar sesión
-				Codigo1_1(nombre, password, buff2, usuario);
+				Codigo1_1(nombre, password, buff2, usuario, sock_conn);
 				// Y lo enviamos
 				write (sock_conn,buff2, strlen(buff2));
-				
+				printf("Jug: %s; socket: %d", usuario, sock_conn);
 			}
 			if (codigo == 2) { // Registrarse
 				
@@ -411,14 +611,35 @@ void *AtenderCliente(void *socket){
 				// Y lo enviamos
 				write (sock_conn,buff2, strlen(buff2));
 			}
+			else if (codigo == 5){// Enviar invitación
+				pthread_mutex_lock( &mutex );
+				Codigo2_5(usuario, nombre, buff2, sock_conn);
+				pthread_mutex_unlock( &mutex );
+			}
+			else if (codigo == 6){// Recibir invitación
+				
+				char respuesta[20];
+				strcpy(respuesta, nombre);
+				p = strtok(NULL,"/");
+				int indice = atoi(p);
+				pthread_mutex_lock( &mutex );
+				Codigo2_6(respuesta, indice, buff2, usuario, sock_conn);
+				pthread_mutex_unlock( &mutex );
+			}
+			else if (codigo==7){// Notificar si la partida ha empezado
+				pthread_mutex_lock( &mutex );
+				Codigo2_7(atoi(nombre), buff2, sock_conn);
+				pthread_mutex_unlock( &mutex );
+			}
 		}
 		if(((form==0)&&(codigo==0))||((form==1)&&(codigo==1))){ //Cada vez que un usuario se conecta o desconecta enviamos una notificación de la lista de conectados actualizada a el mismo y al resto de usuarios
 			Cadena(&listaConectados, notificacion);
 			sprintf(buff2, "2/4/%s", notificacion);
 			int j;
 			for (j=0;j<i;j++){
-				write(sockets[j],buff2,strlen(buff2));
+				write(sockets[j],buff2,strlen(buff2));//Cambiar los sockets por los sockets de la lista
 			}
+			printf ("\n%s\n", buff2);
 		}
 	}
 }
@@ -441,9 +662,13 @@ int main(int argc, char *argv[])
 	serv_adr.sin_addr.s_addr = htonl(INADDR_ANY);
 	
 	// escucharemos en el port 9050
-	serv_adr.sin_port = htons(50054);
-	if (bind(sock_listen, (struct sockaddr *) &serv_adr, sizeof(serv_adr)) < 0)
+	serv_adr.sin_port = htons(9080);//************************************************************************
+	//serv_adr.sin_port = htons(50054);
+	int error_bind=0;
+	if (bind(sock_listen, (struct sockaddr *) &serv_adr, sizeof(serv_adr)) < 0){
 		printf ("Error al bind\n");
+		error_bind=1;
+	}
 	//La cola de peticiones pendientes no podr? ser superior a 4
 	if (listen(sock_listen, 2) < 0)
 		printf("Error en el Listen\n");
@@ -456,15 +681,20 @@ int main(int argc, char *argv[])
 				mysql_errno(conn), mysql_error(conn));
 		exit (1);
 	}
-	conn = mysql_real_connect (conn, "shiva2.upc.es","root", "mysql", "T2Juego",0, NULL, 0);
+	//conn = mysql_real_connect (conn, "shiva2.upc.es","root", "mysql", "T2Juego",0, NULL, 0);
+	conn = mysql_real_connect (conn, "localhost","root", "mysql", "Juego",0, NULL, 0);
 	if (conn==NULL) {
 		printf ("Error al inicializar la conexi\uffc3\uffb3n: %u %s\n", 
 				mysql_errno(conn), mysql_error(conn));
 		exit (1);
 	}
-	// Atenderemos solo 5 peticione
-	for(i=0;i<500;i++){
-		printf ("Escuchando\n");
+	
+	Inicializar(tablaPartidas);
+	i=0;
+	
+	for(;;){
+		if (error_bind==0)
+			printf ("Escuchando\n");
 	
 		sock_conn = accept(sock_listen, NULL, NULL);
 		printf ("He recibido conexión\n");
@@ -473,6 +703,7 @@ int main(int argc, char *argv[])
 		sockets[i] = sock_conn;
 		//Atender
 		pthread_create (&thread[i], NULL, AtenderCliente, &sockets[i]);
+		i++;
 	}
 	mysql_close (conn);
 }

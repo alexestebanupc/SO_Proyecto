@@ -29,6 +29,7 @@ namespace EjGuia
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.posicionMedia = new System.Windows.Forms.RadioButton();
             this.jugMasVeces = new System.Windows.Forms.RadioButton();
             this.nombreTxt = new System.Windows.Forms.TextBox();
@@ -43,6 +44,8 @@ namespace EjGuia
             this.contraseñaTxt = new System.Windows.Forms.TextBox();
             this.usuarioTxt = new System.Windows.Forms.TextBox();
             this.conectadosGrid = new System.Windows.Forms.DataGridView();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.segundosLbl = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.conectadosGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -186,12 +189,25 @@ namespace EjGuia
             this.conectadosGrid.RowTemplate.Height = 28;
             this.conectadosGrid.Size = new System.Drawing.Size(241, 226);
             this.conectadosGrid.TabIndex = 13;
+            this.conectadosGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.conectadosGrid_CellClick);
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // segundosLbl
+            // 
+            this.segundosLbl.Location = new System.Drawing.Point(413, 105);
+            this.segundosLbl.Name = "segundosLbl";
+            this.segundosLbl.Size = new System.Drawing.Size(100, 54);
+            this.segundosLbl.TabIndex = 14;
             // 
             // Inicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(900, 562);
+            this.Controls.Add(this.segundosLbl);
             this.Controls.Add(this.conectadosGrid);
             this.Controls.Add(this.loginBtn);
             this.Controls.Add(this.registrarseBtn);
@@ -233,6 +249,8 @@ namespace EjGuia
         private System.Windows.Forms.TextBox contraseñaTxt;
         private System.Windows.Forms.TextBox usuarioTxt;
         private System.Windows.Forms.DataGridView conectadosGrid;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Label segundosLbl;
     }
 }
 

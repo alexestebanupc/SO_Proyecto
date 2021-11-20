@@ -16,9 +16,13 @@ namespace EjGuia
     {
         Socket server;
         Thread atender;
-        string ip = "147.83.117.22";
-        int puerto = 50054;
+        //string ip = "147.83.117.22";
+        //int puerto = 50054;
+        string ip = "192.168.56.102";
+        int puerto = 9080;
         delegate void DelegadoParaActualizar(string mensaje);
+        int tiempoEspera;
+        int indicePartida;
 
         public Inicio()
         {
@@ -28,7 +32,7 @@ namespace EjGuia
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            tiempoEspera = 0;
         }
 
         /// <summary>
@@ -68,12 +72,11 @@ namespace EjGuia
                 //Recibimos del servidor
                 byte[] msg2 = new byte[80];
                 server.Receive(msg2);
-                //if (msg2[0] == 0)
-                    //continue;
                 string[] trozos = Encoding.ASCII.GetString(msg2).Split('/');
                 int form = Convert.ToInt32(trozos[0]);
                 int codigo = Convert.ToInt32(trozos[1]);
                 string mensaje = trozos[2].Split('\0')[0];
+                string auxiliar;
 
                 switch (form)
                 {
@@ -136,6 +139,82 @@ namespace EjGuia
                             case 4://Actualizar DGV
                                 DelegadoParaActualizar delegado = new DelegadoParaActualizar(ActualizarDGV);
                                 conectadosGrid.Invoke(delegado, new object[] {mensaje});
+                                break;
+                            case 5://Recibe la invitación
+                                auxiliar = mensaje.Split(',')[0];
+                                if (auxiliar == "0")
+                                {
+                                    string emisor = mensaje.Split(',')[1];
+                                    string indice = mensaje.Split(',')[2];
+                                    DialogResult dialogResult = MessageBox.Show("Te ha llegado una invitación de " + emisor, "Invitación", MessageBoxButtons.YesNo);
+                                    if (dialogResult == DialogResult.Yes)
+                                    {
+                                        indicePartida = Convert.ToInt32(indice);
+                                        string respuesta = "2/6/si/" + indice;
+                                        // Enviamos el nombre al servidor
+                                        byte[] msg = Encoding.ASCII.GetBytes(respuesta);
+                                        server.Send(msg);
+                                    }
+                                    else if (dialogResult == DialogResult.No)
+                                    {
+                                        string respuesta = "2/6/no/" + indice;
+                                        // Enviamos el nombre al servidor
+                                        byte[] msg = Encoding.ASCII.GetBytes(respuesta);
+                                        server.Send(msg);
+                                    }
+                                }
+                                else if (auxiliar == "1")
+                                {
+                                    MessageBox.Show("No sitio disponible para la partida");
+                                }
+                                else if (auxiliar == "3")
+                                {
+                                    indicePartida = Convert.ToInt32(mensaje.Split(',')[1]);
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Partida llena de jugadores");
+                                }
+                                break;
+                            case 6:// Respuesta de los invitados
+                                auxiliar = mensaje.Split(',')[0];
+                                if(auxiliar == "0")
+                                {
+                                    string resultado = mensaje.Split(',')[1];
+                                    string indice = mensaje.Split(',')[2];
+                                    string emisor = mensaje.Split(',')[3];
+                                    if (resultado == "si")
+                                    {
+                                        MessageBox.Show(emisor + " ha aceptado la partida");
+                                    }
+                                    else if (resultado == "no")
+                                    {
+                                        MessageBox.Show(emisor + " ha rechado la partida");
+                                    }
+                                }
+                                else if (auxiliar == "1")
+                                {
+                                    MessageBox.Show("No sitio disponible para la partida");
+                                }
+                                else if(auxiliar == "2")
+                                {
+                                    MessageBox.Show("Partida llena de jugadores");
+                                }
+                                else
+                                {
+                                    MessageBox.Show("No has podido entrar en la partida porque ya ha empezado");
+                                }
+                                break;
+                            case 7:
+                                auxiliar = mensaje.Split(',')[0];
+                                if (auxiliar == "0")
+                                {
+                                    MessageBox.Show("La partida va a empezar");
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Nadie ha aceptado la solicitud");
+                                }
                                 break;
                         }
                         break;
@@ -322,6 +401,41 @@ namespace EjGuia
                     MessageBox.Show("No he podido desconectarme del servidor");
                     return;
                 }
+            }
+        }
+
+        /// <summary>
+        /// Seleccionamos en la DataGrid View al usuario que queremos invitar
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void conectadosGrid_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            string nombre_invitado = conectadosGrid.Rows[e.RowIndex].Cells[0].Value.ToString();
+
+            string mensaje = "2/5/" + nombre_invitado;
+            // Enviamos al servidor el nombre tecleado
+            byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
+            server.Send(msg);
+            if(tiempoEspera == 0)
+            {
+                timer1.Start();
+                timer1.Interval = 1000;
+            }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            tiempoEspera++;
+            segundosLbl.Text = Convert.ToString(tiempoEspera);
+            if (tiempoEspera == 10)
+            {
+                string mensaje = "2/7/"+ indicePartida;
+                // Enviamos al servidor el nombre tecleado
+                byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
+                server.Send(msg);
+                timer1.Stop();
+                tiempoEspera = 0;//Poner el tiempo a 0 por si hay que volver a invitar a alguien
             }
         }
     }
