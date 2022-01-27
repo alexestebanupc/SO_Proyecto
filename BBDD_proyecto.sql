@@ -1,0 +1,84 @@
+DROP DATABASE IF EXISTS T2Juego;
+
+CREATE DATABASE T2Juego;
+
+USE T2Juego;
+
+
+CREATE TABLE Jugador (
+
+ Id INTEGER PRIMARY KEY NOT NULL,
+
+ Nombre VARCHAR(100) NOT NULL,
+ Contraseña VARCHAR(100) NOT NULL	
+
+)ENGINE = InnoDB;
+
+
+CREATE TABLE Partida (
+
+ Id INTEGER PRIMARY KEY NOT NULL,
+
+ Fecha VARCHAR(100) NOT NULL
+
+)ENGINE = InnoDB;
+
+
+CREATE TABLE Participacion (
+
+ Id_J INTEGER NOT NULL,
+
+ Id_P INTEGER NOT NULL,
+
+ Posicion INTEGER NOT NULL,
+
+ FOREIGN KEY (Id_J) REFERENCES Jugador(Id),
+
+ FOREIGN KEY (Id_P) REFERENCES Partida(Id)
+
+)ENGINE = InnoDB;
+
+
+INSERT INTO Jugador VALUES(1,'Juan','efwefw2');
+
+INSERT INTO Jugador VALUES(2,'Maria','123frdsj');
+
+INSERT INTO Jugador VALUES(3,'Pedro','32fredfe4');
+
+INSERT INTO Jugador VALUES(4,'Luis','5765b6u5y');
+
+INSERT INTO Jugador VALUES(5,'Julia','2342cr');
+
+INSERT INTO Jugador VALUES(6,'1','1');
+
+INSERT INTO Jugador VALUES(7,'2','2');
+
+INSERT INTO Partida VALUES(1,'2021/6/13');
+
+INSERT INTO Partida VALUES(2,'2021/9/27');
+
+INSERT INTO Partida VALUES(3,'2021/5/16');
+
+INSERT INTO Partida VALUES(10,'2021/5/15');
+
+INSERT INTO Partida VALUES(11,'2021/5/5');
+
+INSERT INTO Partida VALUES(12,'2021/5/1');
+
+INSERT INTO Participacion VALUES(1,10,1);
+
+INSERT INTO Participacion VALUES(1,11,1);
+
+INSERT INTO Participacion VALUES(1,12,1);
+
+INSERT INTO Participacion VALUES(2,2,1);
+
+INSERT INTO Participacion VALUES(2,3,4);
+
+INSERT INTO Participacion VALUES(3,1,2);
+
+INSERT INTO Participacion VALUES(4,1,4);
+
+INSERT INTO Participacion VALUES(5,1,3);
+
+INSERT INTO Participacion VALUES(5,2,3);
